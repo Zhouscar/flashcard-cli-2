@@ -1,8 +1,9 @@
 import { setToCardsDatabase } from "../../../../database";
 import { getEmptyCards } from "../../../../database/getters";
-import { promptChoice, promptText } from "../../../cliHelpers";
+import { heading, promptChoice, promptText } from "../../../cliHelpers";
 
 export async function FillEmpty() {
+    heading("Fill Empty");
     const cards = getEmptyCards();
     while (cards.length > 0) {
         const card = cards.pop()!;

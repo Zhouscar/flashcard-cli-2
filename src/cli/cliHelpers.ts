@@ -28,15 +28,8 @@ export const BgCyan = "\x1b[46m";
 export const BgWhite = "\x1b[47m";
 export const BgGray = "\x1b[100m";
 
-export function headingify(text: string) {
-    return `\n----${text}${"-".repeat(100 - text.length)}\n`;
-}
-
-export async function decorate<T>(title: string, process: () => T) {
-    console.log(headingify("Home"));
-    const result = await process();
-    console.log();
-    return result;
+export function heading(text: string) {
+    console.log(`\n----${text}${"-".repeat(100 - text.length)}\n`);
 }
 
 export async function promptText(message: string): Promise<string> {
