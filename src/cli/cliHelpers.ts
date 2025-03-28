@@ -32,6 +32,13 @@ export function headingify(text: string) {
     return `\n----${text}${"-".repeat(100 - text.length)}\n`;
 }
 
+export async function decorate<T>(title: string, process: () => T) {
+    console.log(headingify("Home"));
+    const result = await process();
+    console.log();
+    return result;
+}
+
 export async function promptText(message: string): Promise<string> {
     const { text } = await inquirer.prompt([
         {

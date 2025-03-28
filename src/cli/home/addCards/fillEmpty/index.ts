@@ -10,5 +10,6 @@ export async function FillEmpty() {
             break;
         const summary = await promptText(card.name + "\n");
         setToCardsDatabase({ ...card, summary });
+        console.log();
     }
 }
