@@ -35,14 +35,25 @@ async function ReviewSelective(
         }
         await ReviewOne(card);
     }
+    console.log(`\nDone reviewing ${cardGroupName}`);
     return undefined;
 }
 
 export async function ReviewCards() {
     heading("Review Cards");
+    const cards = getDueCards();
+    const newCards = cards.filter((card) => card.state === State.New);
+    const learningCards = cards.filter(
+        (card) =>
+            card.state === State.Learning || card.state === State.Relearning,
+    );
+    const reviewCards = cards.filter((card) => card.state === State.Review);
+    console.log(
+        `There are currently\n  ${newCards.length} new cards,\n  ${learningCards.length} learning cards,\n  ${reviewCards.length} review cards.`,
+    );
     while (true) {
         const cards = getDueCards();
-        if (cards.length === 0) return;
+        if (cards.length === 0) break;
 
         const newCards = cards.filter((card) => card.state === State.New);
         const learningCards = cards.filter(
@@ -73,4 +84,5 @@ export async function ReviewCards() {
             "EXITED";
         if (exited) return;
     }
+    console.log("\nYou're done, Princess");
 }

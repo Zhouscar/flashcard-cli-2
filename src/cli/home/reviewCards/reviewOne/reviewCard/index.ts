@@ -10,13 +10,14 @@ export async function ReviewCard(card: Flashcard) {
     console.log(card.name);
     const today = new Date();
     const startTime = performance.now() / 1000;
-    await promptText("");
+    console.log();
+    await promptText("Enter to show answer\n");
     const endTime = performance.now() / 1000;
     const elapsed = endTime - startTime;
     console.log(card.summary!);
-    const choice = await promptChoice("Did you get it", ["no", "yes"]);
+    const choice = await promptChoice("\n", ["forgot", "remembered"]);
     const grade: Grade =
-        choice === "no"
+        choice === "forgot"
             ? Rating.Again
             : elapsed < 5
             ? Rating.Easy

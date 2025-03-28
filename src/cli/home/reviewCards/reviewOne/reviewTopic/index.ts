@@ -12,7 +12,7 @@ export async function ReviewTopic(topic: Flashcard) {
     let grade: Grade;
     if (topic.summary !== undefined) {
         const startTime = performance.now() / 1000;
-        await promptText("");
+        await promptText("Enter to show answer\n");
         const endTime = performance.now() / 1000;
         const elapsed = endTime - startTime;
         const cardIds = getTopicCardIds(topic.id);
@@ -21,9 +21,9 @@ export async function ReviewTopic(topic: Flashcard) {
             console.log(` - ${card.name} (${card.summary!})`);
         });
         console.log(topic.summary!);
-        const choice = await promptChoice("Did you get it", ["no", "yes"]);
+        const choice = await promptChoice("\n", ["forgot", "remembered"]);
         grade =
-            choice === "no"
+            choice === "forgot"
                 ? Rating.Again
                 : elapsed < 10
                 ? Rating.Easy
