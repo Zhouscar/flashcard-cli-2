@@ -11,7 +11,7 @@ export async function ReviewCard(card: Flashcard) {
     const today = new Date();
     const startTime = performance.now() / 1000;
     console.log();
-    await promptText("Enter to show answer\n");
+    await promptText("=\n");
     const endTime = performance.now() / 1000;
     const elapsed = endTime - startTime;
     console.log(card.summary!);
@@ -27,7 +27,7 @@ export async function ReviewCard(card: Flashcard) {
     const newData = f.repeat(card, today)[grade].card;
     const newSummary = await (async () => {
         while (true) {
-            const newSummary = await promptText("Re-summarize\n");
+            const newSummary = await promptText("\nRe-summarize\n");
             if (newSummary.trim().length === 0) {
                 console.log("ERROR: Re-summary cannot be blank.");
                 continue;
@@ -38,7 +38,7 @@ export async function ReviewCard(card: Flashcard) {
     const topicsToAdd = getTopics().filter(
         (topic) => !card.topicIds.includes(topic.id),
     );
-    let chosenTopicName = (await promptChoice("Add to a topic", [
+    let chosenTopicName = (await promptChoice("\nAdd to a topic", [
         "NEW TOPIC",
         ...topicsToAdd.map((topic) => topic.name),
     ]))!;
